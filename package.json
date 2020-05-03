@@ -13,13 +13,15 @@
   },
   "keywords": [
     "Boilerplate",
-    "Vanilla",
+    "VanillaJS",
     "Frontend",
+    "Frontend Framework",
     "JS",
     "Javascript",
-    "Parcel",
+    "Parcel Bundler",
     "Babel",
-    "Framework"
+    "Framework",
+    "Sass"
   ],
   "author": "Joseledgy",
   "license": "ISC",
