@@ -1,0 +1,29 @@
+{
+  "name": "frontend-js-framework",
+  "version": "1.0.0",
+  "description": "A boilerplate for writing Vanilla JavaScript front-end development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephlegere/Boilerplate-Vanilla-JS-Frontend-Framework.git"
+  },
+  "keywords": [
+    "Boilerplate",
+    "Vanilla",
+    "Frontend",
+    "JS",
+    "Javascript",
+    "Parcel",
+    "Babel",
+    "Framework"
+  ],
+  "author": "Joseledgy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephlegere/Boilerplate-Vanilla-JS-Frontend-Framework/issues"
+  },
+  "homepage": "https://github.com/josephlegere/Boilerplate-Vanilla-JS-Frontend-Framework#readme"
+}
