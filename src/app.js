@@ -1,22 +1,13 @@
 import { SERVER_ATTR, RENDER_SOURCE } from './configurations';
 import { Instantiate } from './essentials/appinstantiate';
+import { Router } from './essentials/router';
+import { add_html, present } from './essentials/library';
 import './app.scss';
 
-//Sub Pages
-let app_functions = {
-    /*"Invoicing": {
-        "Recent Invoices": {
-            "construct": RecentInvoicesPage
-            //"params": { "view": "page" }
-        },
-        "Create Invoice": {
-            "construct": CreateInvoicePage
-        },
-        "Archived Invoices": null
-    }*/
-};
-//We could have a separate object for user specific app functions,
-//and then an object that would function how a page would render
+
+
+
+let app_instance = new Instantiate();
 
 let dashboardPage = class { //wrapper for the app itself, that would supposedly also jumpstart the app
 
@@ -29,8 +20,12 @@ let dashboardPage = class { //wrapper for the app itself, that would supposedly 
 
         //internal elements -> this includes properties that were converted from parameters
         this.trigger_elements = {};
+        console.log(present.getDateTime('dd MM, yyyy w'))
 
-        this.set_default();
+        this.set_default(); // change to state
+        this.state = {
+            
+        }
 
         this.render();
         this.triggers();
@@ -124,10 +119,7 @@ let dashboardPage = class { //wrapper for the app itself, that would supposedly 
             </div>
         `;
 
-        add_html({
-            element: RENDER_SOURCE,
-            value: _html
-        });
+        add_html(RENDER_SOURCE, _html);
 
         //app_instance.instantiate(app_functions);
 
@@ -143,5 +135,3 @@ let dashboardPage = class { //wrapper for the app itself, that would supposedly 
 
 //INIT App
 app_instance.runApp(dashboardPage);
-
-let app_instance = new Instantiate();

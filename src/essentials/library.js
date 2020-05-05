@@ -1,32 +1,22 @@
-let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-let months_abbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-let date_formats = {
-    'dd': getToday().getDate(),
-    'MM': months[getToday().getMonth()],
-    'mm': getToday().getMonth() + 1,
-    'yyyy': getToday().getFullYear(),
-    'w': getToday().getDay().toString() //get the "day name" of the week
-}
+'use strict';
 
 //DOM Manipulate
-let add_html = (params) => {
-    let _elem = document.querySelector(params.element);
+let add_html = (elem, data) => {
+    let _elem = document.querySelector(elem);
     if (_elem !== null) { //check if element exist, if not then no need to add
-        _elem.innerHTML = params.value;
+        _elem.innerHTML = data;
     }
 }
 
-let append_html = (params) => {
-    let _elem = document.querySelector(params.element);
+let append_html = (elem, data) => {
+    let _elem = document.querySelector(elem);
     if (_elem !== null) { //check if element exist, if not then no need to append
-        _elem.insertAdjacentHTML('beforeend', params.value);
+        _elem.insertAdjacentHTML('beforeend', data);
     }
 }
 
-let remove_element = (params) => {
-    let _val = params.value;
-    let _elem = document.querySelector(_val);
+let remove_element = (elem) => {
+    let _elem = document.querySelector(elem);
     if (_elem !== null) { //check if element exist, if not then no need to remove
         _elem.parentNode.removeChild(_elem);
     }
@@ -42,10 +32,7 @@ let renderPreLoader = (isAppend, bg) => {
     </div>`;
 
     if (!isAppend) {
-        add_html({
-            element: _render,
-            value: _loader
-        });
+        add_html(_render, _loader);
     }
 
     return _loader;
@@ -100,6 +87,8 @@ let dragElement = (elem) => {
     }
 
     let trigger = elem.addEventListener('mousedown', trigger_function);
+
+    return trigger;
     
     //if (dragHandle) {
         /* if present, the header is where you move the DIV from:*/
@@ -124,15 +113,15 @@ let isJSON = (str) => {
     }
 } 
 
-let capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+let capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-let lowerCaseFirstLetter = (string) => {
-    return string.charAt(0).toLowerCase() + string.slice(1);
+let lowerCaseFirstLetter = (str) => {
+    return str.charAt(0).toLowerCase() + str.slice(1);
 }
 
-let multiIndex = (arr, elem, type) => {
+let multiIndex = (arr, elem, type) => { //change to recursion
     let _return = -1;
     arr.forEach(function (value, key) {
         if (!isNaN(parseFloat(elem)) && isFinite(elem)) {
@@ -149,9 +138,7 @@ let multiIndex = (arr, elem, type) => {
     return _return;
 }
 
-let convert12To24 = (val) => {
-    let _return = '';
-    let time = val;
+let timeFormat12To24 = (time) => {
 
     let hours = Number(time.match(/^(\d+)/)[1]);
     let minutes = Number(time.match(/:(\d+)/)[1]);
@@ -165,15 +152,10 @@ let convert12To24 = (val) => {
     if (hours < 10) sHours = "0" + sHours;
     if (minutes < 10) sMinutes = "0" + sMinutes;
 
-    _return = sHours + ":" + sMinutes;
-
-    return _return;
+    return sHours + ":" + sMinutes;
 }
 
-let convert24To12 = (val) => {
-    let _return = '';
-    let time = val;
-
+let timeFormat24To12 = (time) => {
     let hours = Number(time.match(/^(\d+)/)[1]);
     let minutes = Number(time.match(/:(\d+)/)[1]);
     let AMPM = '';
@@ -188,156 +170,106 @@ let convert24To12 = (val) => {
     if (hours < 10) sHours = "0" + sHours;
     if (minutes < 10) sMinutes = "0" + sMinutes;
 
-    _return = sHours + ":" + sMinutes + ' ' + AMPM;
-
-    return _return;
+    return sHours + ":" + sMinutes + ' ' + AMPM;
 }
 
-let convertTimeToMin = (val) => {
-    let _return = '';
-    let hours = Number(val.match(/^(\d+)/)[1]) * 60;
-    let minutes = Number(val.match(/:(\d+)/)[1]);
-    _return = hours + minutes;
-
-    return _return;
+let timeMinHrToMin = (minHr) => {
+    let hours = Number(minHr.match(/^(\d+)/)[1]) * 60;
+    let minutes = Number(minHr.match(/:(\d+)/)[1]);
+    return hours + minutes;
 }
 
-let convertMinToHR = (val) => {
-    let _return = '';
-    hours = (parseInt(val / 60)).toString().padStart(2, '0');
-    minutes = (val % 60).toString().padStart(2, '0');
-    _return = hours + ':' + minutes;
-    return _return;
+let timeMinToMinHr = (min) => {
+    let hours = (parseInt(min / 60)).toString().padStart(2, '0');
+    let minutes = (min % 60).toString().padStart(2, '0');
+    return hours + ':' + minutes;
 }
 
-let convertMinToTime = (val) => {
-    let _return = '';
-    let _min = val;
-    let hours = Math.floor(_min / 60);
-    let minHr = hours * 60;
-    let minutes = ((_min - minHr).toString()).padStart(2, '0');
-    _return = hours + ':' + minutes;
-
-    return _return;
-}
-
-let convertSecToMin = (val) => {
-    let _return = '';
-    let seconds = val;
+let timeSecToMin = (sec) => {
+    let seconds = sec;
     let minutes = parseInt(seconds) / 60;
-    _return = minutes;
-    return _return;
+    return minutes;
 }
 
 let numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-let convertNewLine = (x) => {
+let newLineToLineBreak = (x) => {
     return x.replace(/\r?\n/g, '<br>');
 }
 
 let convertLineBreak = (x) => {
 }
 
-//time
-let dateTime = {
+let present = (function() { //namespace
+    let self = {}; //this namespace
 
-    var_formats (str, today) {
+    let getToday = function () { //get today instance
+        let today = new Date();
+        return today;
+    }
 
-        let _formats = {
-            'dd': today.getDate(),
-            'MM': months[today.getMonth()],
-            'mm': today.getMonth() + 1,
-            'yyyy': today.getFullYear(),
-            'w': today.getDay().toString() //get day name of the week
-        }
-        
-        let _string = '';
-        let format_string = '';
-        let additional_string = null;
+    let day_name = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let month_name = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let month_abbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    let formats = {
+        'dd': getToday().getDate(),
+        'MM': month_name[getToday().getMonth()],
+        'mm': getToday().getMonth() + 1,
+        'yyyy': getToday().getFullYear(),
+        'w': day_name[getToday().getDay()] //get the "day name" of the week
+    };
 
-        try {
-            Object.entries(_formats).forEach((e) => {
-                let _key = e[0];
-                let _val = e[1];
-                format_string = new RegExp(_key, 'g');
-                format_string = str.match(format_string);
-                if (format_string !== null) {
-                    additional_string = str.replace(format_string, ' ');
-                    throw null
-                }
-            });
-        }
-        catch (e) {
-            //none
-        }
-        
-        additional_string = additional_string.split(' ');
-        _string = additional_string[0] + _formats[format_string] + additional_string[1];
+    self.getDateTime = function (str) {
+        let date = null;
 
-        return _string;
-    },
+        date = (str === undefined || str === '' ? getToday() : getFormat(str));
+        return date;
+    }
 
-    getDateTime (dateStr) {
-        let _dateString = dateStr
-        let _date = null;
+    let getFormat = function (str) {
+        let format_list = []; //element, start, length
+        let present = '';
+        let str_list = str.split('');
 
-        _date = this.getFormat(_dateString);
-        return _date;
-    },
+        Object.keys(formats).forEach((elem) => { //initial review of the string parameters, to determine the position of every date_format in the string. This would avoid other characters e.g. ,.|{}[]~
+            let len = elem.length;
+            let re = RegExp(`${elem}`, 'g');
+            let match;
 
-    getFormat (str) {
-
-        let date_format_list = []; //element, start, length
-        let _dateTime = '';
-
-        let _string = str;
-        let _string_list = _string.split('');
-
-        Object.entries(date_formats).forEach((elem) => { //initial review of the string parameters, to determine the position of every date_format in the string
-            let _format_elem = elem[0];
-            let position = _string.indexOf(_format_elem);
-            let _length = _format_elem.length;
-            
-            while (position !== -1) {
-                if (position > -1) {
-                    date_format_list.push([_format_elem, position, _length]);
-                }
-                position = _string.indexOf('i', position + 1);
+            while ((match = re.exec(str)) != null) {
+                format_list.push([elem, match.index, len]);
             }
         });
 
-        date_format_list.sort((a, b) => { //sort the date format list
+        format_list.sort((a, b) => { //sort the date format list, also for duplicate formats
             return a[1] - b[1];
         });
-        
-        let _range = _string_list.length; //range of string_list(array)
+
         let _count = 0; //index of "date format list"
-        
-        for ( let i = 0; i < _range; i++ ) {
-            let _elem = _string_list[i];
-            
-            if (date_format_list[_count][1] == i) { //"date format" element that would be retrieve from the "date_formats" collection
-                _dateTime += date_formats[date_format_list[_count][0]];
-                i += (date_format_list[_count][2] - 1);
+
+        for (let i = 0; i < str_list.length; i++) {
+            let elem = str_list[i];
+
+            if (format_list[_count][1] === i) { //"date format" element that would be retrieve from the "date_formats" collection
+                present += formats[format_list[_count][0]];
+                i += (format_list[_count][2] - 1);
                 _count++;
             }
             else { //regular element from the "string array"
-                _dateTime += _elem;
+                present += elem;
             }
         }
-        
-        return _dateTime;
+
+        return present;
     }
+    
+    return self;
+}());
 
-}
+let Page = class {
 
-//Global Functions
-//time
-function getToday () { //get today instance
-    let today = new Date();
-    return today;
 }
 
 export {
@@ -346,8 +278,8 @@ export {
     remove_element,
     renderPreLoader,
     numberWithCommas,
-    convertNewLine,
+    newLineToLineBreak,
     isJSON,
-    dateTime,
+    present,
     dragElement
 };

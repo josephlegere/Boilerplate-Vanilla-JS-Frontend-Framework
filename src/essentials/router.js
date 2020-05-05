@@ -1,7 +1,4 @@
-import { SERVER_ATTR, RENDER_SOURCE, today, days, months } from '../../configurations.js';
-import { PrintDoc } from '../printDoc/printDoc.js';
-import { add_html, remove_element, renderPreLoader, numberWithCommas, convertNewLine } from '../library/library.js';
-import { localDatabase } from '../localDatabase/localDatabase.js';
+import { SERVER_ATTR, RENDER_SOURCE } from '../configurations.js';
 
 let Router = class {
 
