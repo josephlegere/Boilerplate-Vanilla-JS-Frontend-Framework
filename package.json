@@ -2,7 +2,7 @@
   "name": "frontend-js-framework",
   "version": "1.0.0",
   "description": "A boilerplate for writing Vanilla JavaScript front-end development",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "rm -rf ./development && rm -rf ./.cache && parcel public/index.html --out-dir development -p 3000",
     "build": "parcel build public/index.html --out-dir dist --public-url ./"

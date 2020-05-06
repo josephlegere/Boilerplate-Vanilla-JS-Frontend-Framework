@@ -1,4 +1,5 @@
 'use strict';
+import Page from './objects/page';
 
 //DOM Manipulate
 let add_html = (elem, data) => {
@@ -12,6 +13,13 @@ let append_html = (elem, data) => {
     let _elem = document.querySelector(elem);
     if (_elem !== null) { //check if element exist, if not then no need to append
         _elem.insertAdjacentHTML('beforeend', data);
+    }
+}
+
+let prepend_html = (elem, data) => {
+    let _elem = document.querySelector(elem);
+    if (_elem !== null) { //check if element exist, if not then no need to append
+        _elem.insertAdjacentHTML('afterbegin', data);
     }
 }
 
@@ -202,6 +210,7 @@ let newLineToLineBreak = (x) => {
 let convertLineBreak = (x) => {
 }
 
+//Namespaces
 let present = (function() { //namespace
     let self = {}; //this namespace
 
@@ -268,18 +277,16 @@ let present = (function() { //namespace
     return self;
 }());
 
-let Page = class {
-
-}
-
 export {
     add_html,
     append_html,
+    prepend_html,
     remove_element,
     renderPreLoader,
     numberWithCommas,
     newLineToLineBreak,
     isJSON,
     present,
+    Page,
     dragElement
 };

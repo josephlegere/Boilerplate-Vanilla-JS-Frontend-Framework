@@ -1,28 +1,33 @@
-let Instantiate = class {
+'use strict';
 
+import { add_html } from './library';
+
+let access_point = 'app-run';
+
+class AppRun extends HTMLElement { //initialize app
     constructor() {
-
-        //external elements
-        this.app_instance = null;
-        this.app_functions = null;
-
-        //internal elements
-        this.trigger_elements = {};
-
-        this.set_default();
+        super();
     }
 
-    set_default() {
+    connectedCallback() {
+        this.innerHTML = `<h1>App Running!</h1>`;
     }
+}
+customElements.define(access_point, AppRun);
 
-    //methods
-    
-    runApp(_instance) {
+let Instantiate = (function() { //Instantiate Namespace
+    let self = {};
+
+    self.runApp = function(_instance) {
         this.app_instance = _instance;
-        let app = new this.app_instance();
+        let app = new this.app_instance(access_point);
+        console.log(app)
+
+        // console.log(app)
+        // add_html(access_point, 'hi');
     }
 
-    instantiate(_functions) {
+    self.startApp = function(_functions) {
         this.app_functions = _functions;
         let _initial_page = Object.values(this.app_functions)[0];
         let _initial_page_key = Object.keys(this.app_functions)[0];
@@ -38,7 +43,7 @@ let Instantiate = class {
         return new _initial_page_class(_initial_page_params);
     }
 
-    name_to_path(val) {
+    let name_to_path = function(val) {
         let i = '';
         let _arr = val.split(' ');
         _arr.forEach((elem, key) => {
@@ -47,7 +52,7 @@ let Instantiate = class {
         return i;
     }
 
-    name_to_title(val) {
+    let name_to_title = function(val) {
         let i = '';
         let _arr = val.split(' ');
 
@@ -59,6 +64,7 @@ let Instantiate = class {
         return i;
     }
 
-}
+    return self;
+}());
 
 export { Instantiate };

@@ -7,9 +7,6 @@ const SERVER_ATTR = {
     PAGE_LOGIN: URL_SERVER + 'login-process.php'
 }
 
-const RENDER_SOURCE = '#content-display';
-
 export {
-    SERVER_ATTR,
-    RENDER_SOURCE
+    SERVER_ATTR
 };
