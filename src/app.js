@@ -1,6 +1,5 @@
 import { SERVER_ATTR } from './configurations';
-import { Instantiate } from './essentials/appinstantiate';
-import { add_html, present, Page } from './essentials/library';
+import { Instantiate, present, Page } from './essentials';
 import './app.scss';
 import App_Page from './app.html';
 

@@ -3,7 +3,7 @@
 import { add_html, append_html } from '../library';
 
 export default class Page {
-    constructor(access, title = null) {
+    constructor(access, title = null, ...args) {
 
         //properties
         this.access = access;
@@ -11,11 +11,9 @@ export default class Page {
         this.page_container = `#${this.page_title}`;
         this.trigger_elements = {};
         this.state = { //setting default or changing to new state
-
         }
 
         this.init();
-
     }
 
     triggers() {

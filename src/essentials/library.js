@@ -1,5 +1,4 @@
 'use strict';
-import Page from './objects/page';
 
 //DOM Manipulate
 let add_html = (elem, data) => {
@@ -287,6 +286,5 @@ export {
     newLineToLineBreak,
     isJSON,
     present,
-    Page,
     dragElement
 };
