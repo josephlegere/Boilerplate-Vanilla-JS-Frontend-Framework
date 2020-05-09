@@ -3,12 +3,21 @@ import { Instantiate, present, Page } from './essentials';
 import './app.scss';
 import App_Page from './app.html';
 
+import { Inputs } from './essentials/objects/inputs';
+
 let dashboardPage = class extends Page { //wrapper for the app itself, that would supposedly also jumpstart the app
 
     constructor(access) {
         super(access, 'dashboard');
         this.access = access;
         super.updateRender(App_Page, 'replace');
+        this.text_inputs = {
+            fname: '',
+            lname: ''
+        }
+
+        this.text_inputs = Inputs.set_input(this.text_inputs);
+
     }
 
     //methods

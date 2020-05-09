@@ -21,10 +21,6 @@ let Instantiate = (function() { //Instantiate Namespace
     self.runApp = function(_instance) {
         this.app_instance = _instance;
         let app = new this.app_instance(access_point);
-        console.log(app)
-
-        // console.log(app)
-        // add_html(access_point, 'hi');
     }
 
     self.startApp = function(_functions) {

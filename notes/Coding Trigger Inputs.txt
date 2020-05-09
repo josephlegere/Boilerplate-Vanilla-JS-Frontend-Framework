@@ -1,0 +1,24 @@
+it first check the DOM for trigger inputs
+that's when it creates eventListeners
+- for every class or identifier it creates a dedicated event listener
+  (regenerating the eventListeners will fail because dynamic inputs/buttons)
+
+or
+
+once class is added it already creates eventListeners (most plausible, leaning more into)
+this is for generalizing events for buttons and inputs
+which might cause some uneccessary data if user doesnt
+include trigger inputs
+- we could import, so that would be the starting point when eventListeners will trigger
+- triggers are called in the child class, not in the parent class(Page)
+- identify the form, then retrieve the ids from their
+- on interact(click/change) will trigger inputs
+- separate the functionality of textinput and clickables (separation of concerns, have submit, inputs or keydowns, and clickables separated)
+
+set inputs
+inputs - number, text, textarea, table inputs, datepickers
+select, options - 
+buttons- input-buttons, buttons, submits
+selectables / clickables (elements that are clickable) - button, button-icons
+links - anchor tags
+external set inputs
