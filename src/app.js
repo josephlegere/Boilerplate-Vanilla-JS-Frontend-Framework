@@ -10,36 +10,33 @@ let dashboardPage = class extends Page { //wrapper for the app itself, that woul
     constructor(access) {
         super(access, 'dashboard');
         this.access = access;
-        super.updateRender(App_Page, 'replace');
+        super.updateRender(App_Page, 'new');
         this.text_inputs = {
             fname: '',
             lname: ''
         }
 
-        this.text_inputs = Inputs.set_input(this.text_inputs);
-
+        this.text_inputs = Inputs.set_input(this.text_inputs); //inputs
+        Inputs.set_submit(this.submitForm.bind(this)); //submits
     }
 
     //methods
 
     //triggers
-    /*
-    trigger() {
-        let userLogged = localDB.get(['log_token']);
-        let body = {
-            password: 'password1'
-        };
-        let request_init = {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'auth-token': userLogged.log_token
-            }
-        };
-        super.accessServer(url, init).then(() => {}).catch(() => {});
+    submitForm() {
+        //let userLogged = localDB.get(['log_token']);
+        console.log(this.text_inputs);
+
+        // let request_init = {
+        //     method: 'POST',
+        //     body: JSON.stringify(body),
+        //     headers: {
+        //         'Content-Type': 'application/json; charset=UTF-8',
+        //         'auth-token': userLogged.log_token
+        //     }
+        // };
+        // super.accessServer(url, init).then(() => { }).catch(() => { });
     }
-    */
 
 }
 

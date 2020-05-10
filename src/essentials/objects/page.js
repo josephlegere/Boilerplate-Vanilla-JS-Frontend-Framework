@@ -14,8 +14,6 @@ export default class Page {
         }
 
         this.init();
-
-        this.triggers();
     }
 
     init() {
@@ -27,27 +25,15 @@ export default class Page {
         add_html(this.access, _html);
         Inputs.setRoot(this.page_container);
     }
-    
-    triggers() {
-        let root_element = document.querySelector(this.page_container);
-
-        let trigger_click_function = async (e) => {
-            e.preventDefault();
-
-            let button = e.target.closest('button');
-
-            if (button) {
-                console.log(this.inputs)
-            }
-        }
-        let trigger_click = root_element.addEventListener('click', trigger_click_function);
-    }
 
     updateRender(html, pos) { //pos => position
-        if (pos == 'replace') {
+        if (pos == 'new') {
             add_html(this.page_container, html);
         }
         else if (pos == 'before end') {
+            append_html(this.page_container, html);
+        }
+        else {
             append_html(this.page_container, html);
         }
     }

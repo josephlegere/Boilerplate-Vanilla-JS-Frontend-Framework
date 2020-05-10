@@ -22,3 +22,11 @@ buttons- input-buttons, buttons, submits
 selectables / clickables (elements that are clickable) - button, button-icons
 links - anchor tags
 external set inputs
+
+features to be added
+- must have id or class for for differentiating the elements
+- inputs are saved automatically in local storage
+- inputs for tables is per row, will just read from the attributes of each cell
+- inputs for tables is separated from input[type = text], need to accomodate both, especially in input_data
+- allow blank initial records
+?- Can inputs be double instance. (Yes. But it would still join other text inputs because it's trying to get every input[type=text] and the custom attribute "input_data")
