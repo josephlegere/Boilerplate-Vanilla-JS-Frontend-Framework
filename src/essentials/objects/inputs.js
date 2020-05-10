@@ -1,5 +1,7 @@
 'use strict';
 
+import _ from 'lodash';
+
 let Inputs = (function() { //namespace
     let self = {}; //this namespace
 
@@ -37,10 +39,31 @@ let Inputs = (function() { //namespace
             if (button_click) {
                 if (button_click.getAttribute(button_attributes) !== null) {
 
-                    let _id = button_click.getAttribute('id');
-                    button_elements.buttons[_id] = { elem: button_click };
-                    if (method !== null) button_elements.buttons[_id].call = method;
-                    button_elements.buttons[_id].call();
+                    let props = {}; //"button" element props
+                    let identifier = null;
+                    let _id = button_click.getAttribute('id'); //get value of ID, will act as identifier
+                    let _cus_attr = button_click.getAttribute(button_attributes); //get value of this attribute if there's any
+
+                    props.c_attr = button_attributes; //keep record of the TYPE of attribute
+                    if (_id !== null && _id !== '') {
+                        identifier = _id;
+                        props.id = _id;
+                    }
+                    if (_cus_attr !== '' && _cus_attr !== null) { //check if custom attribute has value, can act as identifier
+                        identifier = (identifier === null ? _cus_attr : identifier);
+                        props[button_attributes] = _cus_attr; //keep record of the VALUE of this attribute
+                    }
+
+                    if (identifier === null) { //A catch if there's no identifier
+                        let err = Error(`Include an ID and a value in ${button_attributes}`);
+                        console.error(err);
+                        return err;
+                    }
+
+                    button_elements.buttons[identifier] = _.cloneDeep(props);
+                    button_elements.buttons[identifier].elem = button_click; //the DOM element of button
+                    if (method !== null) button_elements.buttons[identifier].call = method; //the function that is being called should be stored also
+                    button_elements.buttons[identifier].call();
 
                     console.log(button_elements.buttons);
                 }
@@ -70,10 +93,27 @@ let Inputs = (function() { //namespace
             if (input_text) {
                 input_attributes.forEach(elem => {
                     if (input_text.hasAttributes(elem) && input_text.getAttribute(elem) !== null) {
-                        console.log(elem);
 
-                        let _attr = input_text.getAttribute(elem);
-                        input_data.inputs[_attr] = input_text.value;
+                        let props = {}; //"input" element props
+                        let identifier = null;
+                        let _cus_attr = input_text.getAttribute(elem); //get value of this attribute, will act as identifier
+                        let _id = input_text.getAttribute('id'); //get value of ID
+
+                        if (_cus_attr !== '' && _cus_attr !== null) {
+                            identifier = _cus_attr;
+                            props[elem] = _cus_attr; //keep record of the VALUE of this attribute
+                            props.c_attr = elem; //keep record of the TYPE of attribute
+                        }
+                        if (_id !== null && _id !== '') props.id = _id; //check if ID has value
+                        
+                        if (identifier === null) { //A catch if there's no identifier
+                            let err = Error(`Include a value in ${elem}`);
+                            console.error(err);
+                            return err;
+                        }
+                        
+                        input_data.inputs[identifier] = _.cloneDeep(props);
+                        input_data.inputs[identifier].value = input_text.value; //the value of the inputted text
                         console.log(input_data.inputs);
                     }
                 });
