@@ -17,7 +17,7 @@ let dashboardPage = class extends Page { //wrapper for the app itself, that woul
         }
 
         this.text_inputs = Inputs.set_input(this.text_inputs); //inputs
-        Inputs.set_submit(this.submitForm.bind(this)); //submits
+        Inputs.set_button(this.submitForm.bind(this)); //clicks
     }
 
     //methods

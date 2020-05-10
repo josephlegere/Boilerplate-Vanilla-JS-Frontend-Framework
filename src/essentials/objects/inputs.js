@@ -18,13 +18,32 @@ let Inputs = (function() { //namespace
         self.root = document.querySelector(root);
     }
 
-    self.set_click = function () {
+    self.set_button = function (method = null, data = null) {
+        if (method === null || typeof method !== 'function') {
+            let err = Error('Params is not a function');
+            console.error(err);
+            return err;
+        }
+
+        let button_elements = { // <= specifically for button
+            buttons: (data !== null ? data : {}) //allow blank initial data, to accomodate elements not initialized in JS
+        };
+        let button_attributes = 'page-click'; //allowed attributes in an element
+
         let trigger_click_function = async (e) => {
             e.preventDefault();
-            let button = e.target.closest('button');
+            let button_click = e.target.closest(`button[${button_attributes}], input[type="button"][${button_attributes}]`);
 
-            if (button) {
-                console.log('button pressed');
+            if (button_click) {
+                if (button_click.getAttribute(button_attributes) !== null) {
+
+                    let _id = button_click.getAttribute('id');
+                    button_elements.buttons[_id] = { elem: button_click };
+                    if (method !== null) button_elements.buttons[_id].call = method;
+                    button_elements.buttons[_id].call();
+
+                    console.log(button_elements.buttons);
+                }
             }
         }
 
@@ -35,7 +54,7 @@ let Inputs = (function() { //namespace
             action: trigger_click_function
         }
 
-        return self.elements;
+        return button_elements;
     }
 
     self.set_input = function (data = null) {
@@ -69,45 +88,6 @@ let Inputs = (function() { //namespace
         }
 
         return input_data;
-    }
-
-    self.set_submit = function (method = null, data = null) {
-        if (method === null || typeof method !== 'function') {
-            let err = Error('Params is not a function');
-            console.error(err);
-            return err;
-        }
-
-        let submit_elements = { // <= specifically for submit
-            buttons: (data !== null ? data : {}) //allow blank initial data, to accomodate elements not initialized in JS
-        };
-        let submit_attributes = 'page-submit'; //allowed attributes in an element
-
-        let trigger_submit_function = async (e) => {
-            e.preventDefault();
-            let submit_click = e.target.closest(`button[${submit_attributes}]`);
-            
-            if (submit_click) {
-                if (submit_click.hasAttributes(submit_attributes) && submit_click.getAttribute(submit_attributes) !== null) {
-                    
-                    let _id = submit_click.getAttribute('id');
-                    submit_elements.buttons[_id] = { call: method, elem: submit_click };
-                    //method();
-                    submit_elements.buttons[_id].call();
-
-                    console.log(submit_elements.buttons);
-                }
-            }
-        }
-
-        self.root.addEventListener('click', trigger_submit_function);
-
-        self.elements['trigger submit'] = {
-            event: 'submit',
-            action: trigger_submit_function
-        }
-
-        return submit_elements;
     }
 
     return self;
