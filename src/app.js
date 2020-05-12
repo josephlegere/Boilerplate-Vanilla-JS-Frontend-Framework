@@ -5,6 +5,9 @@ import App_Page from './app.html';
 
 import { Inputs } from './essentials/objects/inputs';
 
+import router from './essentials/router';
+import routes from './routes';
+
 let dashboardPage = class extends Page { //wrapper for the app itself, that would supposedly also jumpstart the app
 
     constructor(access) {
@@ -42,3 +45,5 @@ let dashboardPage = class extends Page { //wrapper for the app itself, that woul
 
 //INIT App
 Instantiate.runApp(dashboardPage);
+
+router(routes);

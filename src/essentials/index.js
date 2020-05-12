@@ -11,12 +11,12 @@ import {
     present,
     dragElement
 } from './library';
-import Router from './router';
+//import Router from './router';
 import Page from './objects/page';
 
 export {
     Instantiate,
-    Router,
+    //Router,
     add_html,
     append_html,
     prepend_html,

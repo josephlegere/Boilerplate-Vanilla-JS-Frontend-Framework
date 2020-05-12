@@ -1,10 +1,9 @@
 'use strict';
-
 import { add_html } from './library';
 
 let access_point = 'app-run';
 
-class AppRun extends HTMLElement { //initialize app
+class AppRun extends HTMLElement { //initialize app, entry point for the app
     constructor() {
         super();
     }
