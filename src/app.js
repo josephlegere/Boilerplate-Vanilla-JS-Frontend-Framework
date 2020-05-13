@@ -1,19 +1,16 @@
 import { SERVER_ATTR } from './configurations';
-import { Instantiate, present, Page } from './essentials';
+import { AppBuild, RunApp, present } from './essentials';
 import './app.scss';
-import App_Page from './app.html';
+import App_Page from './app.html.js';
 
 import { Inputs } from './essentials/objects/inputs';
-
-import router from './essentials/router';
 import routes from './routes';
 
-let dashboardPage = class extends Page { //wrapper for the app itself, that would supposedly also jumpstart the app
+let dashboardPage = class extends AppBuild { //wrapper for the app itself, that would supposedly also jumpstart the app
+                                             //this app would act as module that will export for other apps
 
-    constructor(access) {
-        super(access, 'dashboard');
-        this.access = access;
-        super.updateRender(App_Page, 'new');
+    constructor() {
+        super('dashboard', App_Page);
         this.text_inputs = {
             fname: '',
             lname: ''
@@ -44,6 +41,6 @@ let dashboardPage = class extends Page { //wrapper for the app itself, that woul
 }
 
 //INIT App
-Instantiate.runApp(dashboardPage);
+RunApp(dashboardPage);
 
-router(routes);
+//router(routes);

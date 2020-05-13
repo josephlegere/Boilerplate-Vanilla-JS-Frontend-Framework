@@ -2,28 +2,39 @@
 
 import { add_html, append_html } from '../library';
 import { Inputs } from './inputs';
+import { html, render } from 'lit-html';
 
 export default class Page {
-    constructor(access, title = null, ...args) {
+    constructor(title, path, view, ...args) {
 
         //properties
-        this.access = access;
+        this.path = path;
+        this.view = view;
         this.page_title = title;
         this.page_container = `#${this.page_title}`;
+        this.access = 'body'; //access point
         this.state = { //setting default or changing to new state
         }
-
-        this.init();
     }
 
     init() {
-        let _html = `
+    }
+
+    render(access = null) {
+        this.access = (access !== null ? access : this.access);
+
+        let wrapper = (props) => html`
             <div class="page-container" id="${this.page_title}">
             </div>
         `;
 
-        add_html(this.access, _html);
+        render(wrapper(this.props), document.querySelector(this.access));
         Inputs.setRoot(this.page_container);
+        render(this.view(this.props), document.querySelector(`${this.page_container}`));
+    }
+
+    setProps(newProps) {
+        this.props = newProps;
     }
 
     updateRender(html, pos) { //pos => position

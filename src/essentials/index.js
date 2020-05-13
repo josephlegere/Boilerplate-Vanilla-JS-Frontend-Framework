@@ -1,4 +1,3 @@
-import { Instantiate } from './appinstantiate';
 import {
     add_html,
     append_html,
@@ -12,10 +11,12 @@ import {
     dragElement
 } from './library';
 //import Router from './router';
+import { AppBuild, RunApp } from './app';
 import Page from './objects/page';
 
 export {
-    Instantiate,
+    AppBuild,
+    RunApp,
     //Router,
     add_html,
     append_html,

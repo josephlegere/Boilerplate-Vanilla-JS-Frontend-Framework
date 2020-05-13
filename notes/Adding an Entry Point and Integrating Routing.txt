@@ -1,0 +1,10 @@
+/* delete appinstantiate, replace with just router
+/* need to have some sort entry point, this would act as an Instantiate
+/* route.js and page should join, or some sort of combination of the two => route.js is now page.js
+add a feature in router where a router could nested or some sort of groupings
+add an authen in the app
+
+for the routes, instead of just Instance of Pages, use the Instance of the dedicated Page e.g. 'class Home', 'class about'
+
+/* App.js is the only main entry point, create its own class that is a modified version of page,
+    - in App class, this is where you would enable the Router class

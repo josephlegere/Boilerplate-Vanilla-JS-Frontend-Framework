@@ -1,12 +1,12 @@
 //Pages
-import Route from './essentials/router/Route';
+import { Page } from './essentials';
 
 import Home from './components/home/home';
 import About from './components/about/about';
 
 let routes = [
-    new Route("home", "/", Home),
-    new Route("about", "/about", About)
+    new Page("home", "/", Home),
+    new Page("about", "/about", About)
 ];
 
 export default routes;

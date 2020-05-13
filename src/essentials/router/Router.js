@@ -44,7 +44,7 @@ export default class Router {
         else {
             history.pushState({}, '', path);
 
-            render(route.renderView(), this.renderNode); // avoided innerHTML
+            render(route.init(), this.renderNode); // avoided innerHTML
         }
     }
 }
