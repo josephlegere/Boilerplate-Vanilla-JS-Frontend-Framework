@@ -2,11 +2,11 @@
 import { Page } from './essentials';
 
 import Home from './components/home/home';
-import About from './components/about/about';
+import Contact from './components/contact/contact';
 
 let routes = [
-    {path: '/', component: Home},
-    {path: '/about', component: About}
+    { path: '/', component: Home },
+    { path: '/contact', component: Contact }
 ];
 
 export default routes;
