@@ -53,13 +53,14 @@ export default (props) => html`
             </button>
 
         </form>
-        
-        <nav>
-            <button route="/">Home</button>
-            <button route="/about">About</button>
-        </nav>
-        <div id="app"></div>
     </div>
+    
+    <nav>
+        <button route="/">Home</button>
+        <button route="/about">About</button>
+    </nav>
+    <router-viewer>
+    </router-viewer>
 
     <footer class="page-footer">
     </footer>

@@ -13,9 +13,13 @@ export default class AppBuild extends Page { //wrapper for the app itself, that 
 
     //methods
     router (routes) {
-        router(routes);
+        router(routes, this.page_container);
     }
 
     //triggers
 
+}
+
+export {
+    access_point
 }

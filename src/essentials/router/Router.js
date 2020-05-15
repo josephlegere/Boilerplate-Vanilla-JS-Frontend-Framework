@@ -1,5 +1,7 @@
 import { render } from 'lit-html';
 
+let viewer = 'router-viewer';
+
 export default class Router {
     constructor(routes = [], renderNode) {
         this.routes = routes;
@@ -44,7 +46,12 @@ export default class Router {
         else {
             history.pushState({}, '', path);
 
-            render(route.init(), this.renderNode); // avoided innerHTML
+            route.render(viewer)
+            //render(route.render(viewer), this.renderNode); // avoided innerHTML
         }
     }
+}
+
+export {
+    viewer
 }

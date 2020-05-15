@@ -1,6 +1,4 @@
-import Router from './Router';
-
-let access_point = 'app-run';
+import Router, {viewer} from './Router';
 
 export const link = (path) => {
     const pushStateEvent = new CustomEvent('_pushstate', { detail: path });
@@ -8,8 +6,8 @@ export const link = (path) => {
     dispatchEvent(pushStateEvent);
 };
 
-export default (routes) => {
-    const router = new Router(routes, document.querySelector(access_point)); //initialize the routers, initialize the app
+export default (routes, root) => { //root => parent
+    const router = new Router(routes, document.querySelector(`${root} ${viewer}`), ); //initialize the routers, initialize the app
 
     document.addEventListener('DOMContentLoaded', (e) => { //when nav buttons are clicked
         document.querySelectorAll('[route]').forEach((route) =>

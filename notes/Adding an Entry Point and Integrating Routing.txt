@@ -7,4 +7,10 @@ add an authen in the app
 for the routes, instead of just Instance of Pages, use the Instance of the dedicated Page e.g. 'class Home', 'class about'
 
 /* App.js is the only main entry point, create its own class that is a modified version of page,
-    - in App class, this is where you would enable the Router class
+    /*- in App class, this is where you would enable the Router class
+
+/*Using the router, it should have a definitive entry point, router-viewer
+
+displaying in router-viewer should be the direct router-viewer to enable nesting of routers or the nearest/direct element
+ /*- use the inherited page class to gain access to parent class
+ - the listed routes should be objects, not classes

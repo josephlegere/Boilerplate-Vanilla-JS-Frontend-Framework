@@ -18,6 +18,7 @@ let dashboardPage = class extends AppBuild { //wrapper for the app itself, that 
 
         this.text_inputs = Inputs.set_input(this.text_inputs); //inputs
         Inputs.set_button(this.submitForm.bind(this)); //clicks
+        this.router(routes);
     }
 
     //methods
@@ -42,5 +43,3 @@ let dashboardPage = class extends AppBuild { //wrapper for the app itself, that 
 
 //INIT App
 RunApp(dashboardPage);
-
-//router(routes);

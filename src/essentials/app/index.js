@@ -1,6 +1,6 @@
 'use strict';
 
-import AppBuild from './AppBuild';
+import AppBuild, {access_point} from './AppBuild';
 import { render } from 'lit-html';
 
 let RunApp = function (instance) {
@@ -10,5 +10,6 @@ let RunApp = function (instance) {
 
 export {
     AppBuild,
+    access_point,
     RunApp
 };

@@ -10,14 +10,15 @@ import {
     present,
     dragElement
 } from './library';
-//import Router from './router';
+import Router, { link } from './router';
 import { AppBuild, RunApp } from './app';
 import Page from './objects/page';
 
 export {
     AppBuild,
     RunApp,
-    //Router,
+    Router,
+    link,
     add_html,
     append_html,
     prepend_html,

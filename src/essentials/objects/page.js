@@ -4,6 +4,8 @@ import { add_html, append_html } from '../library';
 import { Inputs } from './inputs';
 import { html, render } from 'lit-html';
 
+//let container = 'page-container';
+
 export default class Page {
     constructor(title, path, view, ...args) {
 
@@ -24,8 +26,8 @@ export default class Page {
         this.access = (access !== null ? access : this.access);
 
         let wrapper = (props) => html`
-            <div class="page-container" id="${this.page_title}">
-            </div>
+            <page-container id="${this.page_title}">
+            </page-container>
         `;
 
         render(wrapper(this.props), document.querySelector(this.access));
