@@ -1,7 +1,7 @@
 import { SERVER_ATTR } from './configurations';
 import { AppBuild, RunApp, present } from './essentials';
 import './app.scss';
-import App_Page from './app.html.js';
+import appView from './app-view.js';
 
 import { Inputs } from './essentials/objects/inputs';
 import routes from './routes';
@@ -10,7 +10,7 @@ let dashboardPage = class extends AppBuild { //wrapper for the app itself, that 
                                              //this app would act as module that will export for other apps
 
     constructor() {
-        super('dashboard', App_Page);
+        super('dashboard', appView);
         this.text_inputs = {
             fname: '',
             lname: ''
@@ -36,7 +36,7 @@ let dashboardPage = class extends AppBuild { //wrapper for the app itself, that 
         //         'auth-token': userLogged.log_token
         //     }
         // };
-        // super.accessServer(url, init).then(() => { }).catch(() => { });
+        // this.accessServer(url, init).then(() => { }).catch(() => { });
     }
 
 }

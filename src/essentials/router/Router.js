@@ -34,20 +34,23 @@ export default class Router {
             }, null);
         }
 
-        route.setProps(params);
+        //route.setProps(params);
+        route.props = params;
 
         return routeMatch;
     }
 
     navigate(path) {
         const route = this.routes.filter((route) => this.match(route, path))[0];
+        console.log(route)
 
         if (!route) this.renderNode.innerHTML = '404! Page not found';
         else {
             history.pushState({}, '', path);
 
-            route.render(viewer)
-            //render(route.render(viewer), this.renderNode); // avoided innerHTML
+            let component = new route.component(route.path);
+            component.setProps(route.props);
+            component.render(viewer);
         }
     }
 }

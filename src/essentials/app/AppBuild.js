@@ -7,7 +7,7 @@ export default class AppBuild extends Page { //wrapper for the app itself, that 
     //this app would act as module that will export for other apps
 
     constructor(title, view) {
-        super(title, '/', view);
+        super(title, view);
         this.render(access_point); //this is also updates the access
     }
 

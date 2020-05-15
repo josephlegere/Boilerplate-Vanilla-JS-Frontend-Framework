@@ -13,4 +13,4 @@ for the routes, instead of just Instance of Pages, use the Instance of the dedic
 
 displaying in router-viewer should be the direct router-viewer to enable nesting of routers or the nearest/direct element
  /*- use the inherited page class to gain access to parent class
- - the listed routes should be objects, not classes
+ /*- the listed routes should be objects, not classes, it would only create an instance once it has been click

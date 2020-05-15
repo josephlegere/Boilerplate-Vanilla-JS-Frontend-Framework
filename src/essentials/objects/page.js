@@ -7,10 +7,9 @@ import { html, render } from 'lit-html';
 //let container = 'page-container';
 
 export default class Page {
-    constructor(title, path, view, ...args) {
+    constructor(title, view, ...args) {
 
         //properties
-        this.path = path;
         this.view = view;
         this.page_title = title;
         this.page_container = `#${this.page_title}`;

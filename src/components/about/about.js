@@ -1,7 +1,10 @@
-import { html } from "lit-html";
+import { Page } from '../../essentials';
+import aboutView from './about-view';
+//import './home.scss';
 
-export default (props) => html`
-  <div>
-    <p>This is the about page</p>
-  </div>
-`;
+export default class About extends Page {
+
+    constructor() {
+        super('about', aboutView);
+    }
+}

@@ -5,8 +5,8 @@ import Home from './components/home/home';
 import About from './components/about/about';
 
 let routes = [
-    new Page("home", "/", Home),
-    new Page("about", "/about", About)
+    {path: '/', component: Home},
+    {path: '/about', component: About}
 ];
 
 export default routes;
