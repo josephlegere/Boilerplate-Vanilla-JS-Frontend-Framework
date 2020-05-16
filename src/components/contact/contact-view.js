@@ -48,7 +48,7 @@ export default (props) => html`
                 </div>
             </div>
 
-            <button id="submit-form" page-click>
+            <button id="submit-form" page-click="submit-form">
                 Submitings
             </button>
 

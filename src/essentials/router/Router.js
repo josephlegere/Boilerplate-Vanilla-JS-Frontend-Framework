@@ -5,6 +5,7 @@ let viewer = 'router-viewer';
 export default class Router {
     constructor(routes = [], renderNode) {
         this.routes = routes;
+        this.active_routes = {};
         this.renderNode = renderNode;
         this.navigate(location.pathname + location.hash);
     }
@@ -47,10 +48,12 @@ export default class Router {
         if (!route) this.renderNode.innerHTML = '404! Page not found';
         else {
             history.pushState({}, '', path);
+            console.log(this.routes)
+            if (this.active_routes.hasOwnProperty === 'active') delete this.active_routes.active; //record the active page, then delete when navigating to another one
 
-            let component = new route.component(route.path);
-            component.setProps(route.props);
-            component.render(viewer);
+            this.active_routes.active = new route.component();
+            this.active_routes.active.setProps(route.props);
+            this.active_routes.active.render(viewer);
         }
     }
 }

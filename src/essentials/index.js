@@ -13,6 +13,7 @@ import {
 import Router, { link } from './router';
 import { AppBuild, RunApp } from './app';
 import Page from './objects/page';
+import Inputs from './objects/inputs';
 
 export {
     AppBuild,
@@ -29,5 +30,6 @@ export {
     isJSON,
     present,
     dragElement,
-    Page
+    Page,
+    Inputs
 }

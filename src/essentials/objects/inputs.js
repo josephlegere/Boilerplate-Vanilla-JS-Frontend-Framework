@@ -17,18 +17,23 @@ let Inputs = (function() { //namespace
     }
     
     self.setRoot = function (root) {
+        console.log(root)
         self.root = document.querySelector(root);
+        return document.querySelector(root);
     }
 
-    self.set_button = function (method = null, data = null) {
-        if (method === null || typeof method !== 'function') {
-            let err = Error('Params is not a function');
+    self.set_button = function (data = null) {
+        if (data === null || typeof data !== 'object') {
+            let err = Error('Params is not an object');
             console.error(err);
             return err;
         }
 
+        let _buttons = {};
+        Object.entries(data).forEach(elem => {_buttons[elem[0]] = { call: elem[1] } });
+        
         let button_elements = { // <= specifically for button
-            buttons: (data !== null ? data : {}) //allow blank initial data, to accomodate elements not initialized in JS
+            buttons: _.cloneDeep(_buttons)
         };
         let button_attributes = 'page-click'; //allowed attributes in an element
 
@@ -41,28 +46,25 @@ let Inputs = (function() { //namespace
 
                     let props = {}; //"button" element props
                     let identifier = null;
-                    let _id = button_click.getAttribute('id'); //get value of ID, will act as identifier
-                    let _cus_attr = button_click.getAttribute(button_attributes); //get value of this attribute if there's any
+                    let _cus_attr = button_click.getAttribute(button_attributes); //get value of this attribute, will act as identifier
+                    let _id = button_click.getAttribute('id'); //get value of ID
 
                     props.c_attr = button_attributes; //keep record of the TYPE of attribute
-                    if (_id !== null && _id !== '') {
-                        identifier = _id;
-                        props.id = _id;
-                    }
-                    if (_cus_attr !== '' && _cus_attr !== null) { //check if custom attribute has value, can act as identifier
+                    if (_cus_attr !== '' && _cus_attr !== null) {
                         identifier = (identifier === null ? _cus_attr : identifier);
                         props[button_attributes] = _cus_attr; //keep record of the VALUE of this attribute
                     }
+                    if (_id !== null && _id !== '') props.id = _id; //check if ID has value
 
                     if (identifier === null) { //A catch if there's no identifier
-                        let err = Error(`Include an ID and a value in ${button_attributes}`);
+                        let err = Error(`Include a value in ${button_attributes}`);
                         console.error(err);
                         return err;
                     }
 
+                    props.call = button_elements.buttons[identifier].call; //the function that is being called should be stored also
                     button_elements.buttons[identifier] = _.cloneDeep(props);
                     button_elements.buttons[identifier].elem = button_click; //the DOM element of button
-                    if (method !== null) button_elements.buttons[identifier].call = method; //the function that is being called should be stored also
                     button_elements.buttons[identifier].call();
 
                     console.log(button_elements.buttons);
@@ -133,4 +135,4 @@ let Inputs = (function() { //namespace
     return self;
 }());
 
-export { Inputs };
+export default Inputs;

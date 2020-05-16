@@ -3,10 +3,12 @@ import { Page } from './essentials';
 
 import Home from './components/home/home';
 import Contact from './components/contact/contact';
+import Table from './components/table/table';
 
 let routes = [
     { path: '/', component: Home },
-    { path: '/contact', component: Contact }
+    { path: '/contact', component: Contact },
+    { path: '/table', component: Table }
 ];
 
 export default routes;

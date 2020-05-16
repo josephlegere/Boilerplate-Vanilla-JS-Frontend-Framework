@@ -1,7 +1,7 @@
 'use strict';
 
 import { add_html, append_html } from '../library';
-import { Inputs } from './inputs';
+import Inputs from './inputs';
 import { html, render } from 'lit-html';
 
 //let container = 'page-container';
@@ -14,11 +14,16 @@ export default class Page {
         this.page_title = title;
         this.page_container = `#${this.page_title}`;
         this.access = 'body'; //access point
+        this.args = args;
         this.state = { //setting default or changing to new state
         }
+
+        this.init();
     }
 
     init() {
+        this.text_inputs = {};
+        this.button_inputs = {};
     }
 
     render(access = null) {
@@ -30,12 +35,20 @@ export default class Page {
         `;
 
         render(wrapper(this.props), document.querySelector(this.access));
-        Inputs.setRoot(this.page_container);
+        if (this.args.includes('Inputs')) this.setInputs();
+
         render(this.view(this.props), document.querySelector(`${this.page_container}`));
     }
 
+    //setters
     setProps(newProps) {
         this.props = newProps;
+    }
+
+    setInputs() {
+        Inputs.setRoot(this.page_container);
+        this.text_inputs = Inputs.set_input(this.text_inputs); //inputs
+        Inputs.set_button(this.button_inputs); //clicks
     }
 
     updateRender(html, pos) { //pos => position

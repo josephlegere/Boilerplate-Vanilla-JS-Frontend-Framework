@@ -4,7 +4,7 @@ import './home.scss';
 
 export default class Home extends Page {
 
-    constructor(path) {
+    constructor() {
         super('home', homeView);
     }
 }

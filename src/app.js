@@ -3,7 +3,6 @@ import { AppBuild, RunApp, present } from './essentials';
 import './app.scss';
 import appView from './app-view.js';
 
-import { Inputs } from './essentials/objects/inputs';
 import routes from './routes';
 
 let dashboardPage = class extends AppBuild { //wrapper for the app itself, that would supposedly also jumpstart the app
@@ -11,13 +10,7 @@ let dashboardPage = class extends AppBuild { //wrapper for the app itself, that 
 
     constructor() {
         super('dashboard', appView);
-        this.text_inputs = {
-            fname: '',
-            lname: ''
-        }
 
-        this.text_inputs = Inputs.set_input(this.text_inputs); //inputs
-        Inputs.set_button(this.submitForm.bind(this)); //clicks
         this.router(routes);
     }
 
